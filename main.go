@@ -3,30 +3,21 @@ package main
 import (
 	"fmt"
 	gin "github.com/gin-gonic/gin"
-	"net/http"
-	"os"
+	"sample/routers"
 )
 
 func main() {
-	fmt.Println("### Main Start !")
 
-	port := os.Getenv("PORT")
-
-	if port == "" {
-		port = "8080"
-		fmt.Printf("### Defaulting to port : %s \n", port)
-	}
-
-	// Create Gin router
+	// 진 라우터 생성
 	router := gin.Default()
 
-	// Templates path setting
-	router.LoadHTMLGlob("templates/**")
+	// 정적 페이지 템플릿 경로 지정
+	//router.LoadHTMLGlob("templates/**")
 
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.html", gin.H{"title": "Home Page"})
-	})
+	// 라우터 묶음 적용
+	fmt.Println("INIT 라우터 실행")
+	routers.InitRouter(router)
 
-	fmt.Printf("### Listening on port %s \n", port)
-	router.Run() // listen and serve on 0.0.0.0:8080
+	// 서버 실행
+	router.Run()
 }

@@ -1,6 +1,12 @@
 package routers
 
-import "github.com/gin-gonic/gin"
+import (
+	"fmt"
+	"github.com/gin-gonic/gin"
+)
 
-func InitRouter(r *gin.Context) {
+func InitRouter(router *gin.Engine) {
+
+	fmt.Println("UserRouter 그룹 실행")
+	UserRouter(router)
 }
