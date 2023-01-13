@@ -28,3 +28,66 @@ func CreateUser(router *gin.Context) {
 	router.JSON(http.StatusOK, createUser)
 	return
 }
+
+func ReadUser(router *gin.Context) {
+
+	// Param 으로 받은 id 값 바인딩
+	id := router.Param("id")
+
+	// service로 값을 보내어 로직 처리
+	serviceImpl := impl.UserServiceImpl{}
+	readUser, err := serviceImpl.ReadUser(id)
+
+	// error 처리
+	if err != nil {
+		router.JSON(http.StatusBadRequest, gin.H{
+			"error": err,
+		})
+	}
+
+	// Json 구조로 담아 리턴 진행
+	router.JSON(http.StatusOK, readUser)
+	return
+}
+
+func UpdateUser(router *gin.Context) {
+
+	// Param 으로 받은 id 값 바인딩
+	id := router.Param("id")
+
+	// service로 값을 보내어 로직 처리
+	serviceImpl := impl.UserServiceImpl{}
+	updateUser, err := serviceImpl.UpdateUser(id)
+
+	// error 처리
+	if err != nil {
+		router.JSON(http.StatusBadRequest, gin.H{
+			"error": err,
+		})
+	}
+
+	// Json 구조로 담아 리턴 진행
+	router.JSON(http.StatusOK, updateUser)
+	return
+}
+
+func DeleteUser(router *gin.Context) {
+
+	// Param 으로 받은 id 값 바인딩
+	id := router.Param("id")
+
+	// service로 값을 보내어 로직 처리
+	serviceImpl := impl.UserServiceImpl{}
+	err := serviceImpl.DeleteUser(id)
+
+	// error 처리
+	if err != nil {
+		router.JSON(http.StatusBadRequest, gin.H{
+			"error": err,
+		})
+	}
+
+	// Json 구조로 담아 리턴 진행
+	router.JSON(http.StatusOK, gin.H{"status": "success"})
+	return
+}
