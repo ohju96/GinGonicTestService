@@ -4,35 +4,43 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"sample/ent"
-	"sample/model"
+	"user-service/ent"
+	"user-service/model"
 )
 
-func CreateUser(r *gin.Context, client *ent.Client) (*ent.User, error) {
+func CreateUser(r *gin.Context, db *ent.Client) (*ent.User, error) {
 
-	var request model.User
+	var request model.CreateUserRequest
 
 	if err := r.ShouldBindJSON(&request); err != nil {
-		r.JSON(http.StatusBadRequest, gin.H{
-			"ERROR": "Binding error",
-		})
+		r.JSON(http.StatusBadRequest, gin.H{"ERROR": "Binding error !!"})
 	}
 
-	fmt.Println(request.Age)
-	fmt.Println(request.Password)
-	fmt.Println(request.Name)
-	fmt.Println(request.Email)
-
-	user, err := client.User.Create().
-		SetName(request.Name).
-		SetAge(request.Age).
-		SetEmail(request.Email).
-		SetPassword(request.Password).
-		Save(r.Request.Context())
+	user, err := db.User.Create().SetName(request.Name).SetAge(request.Age).SetCode(request.Code).Save(r)
 
 	if err != nil {
-		return nil, fmt.Errorf("failed creating user: %w", err)
+		return nil, fmt.Errorf("유저 생성 실패: %w", err)
 	}
 
 	return user, nil
+
+}
+
+func ReadUser(r *gin.Context, db *ent.Client) (*ent.User, error) {
+	user, err := db.User.Get(r, 1)
+
+	if err != nil {
+		return nil, fmt.Errorf("유저가 없습니다. : %w", err)
+	}
+
+	return user, nil
+
+}
+
+func UpdateUser(r *gin.Context, db *ent.Client) {
+
+}
+
+func DeleteUser(r *gin.Context, db *ent.Client) {
+
 }

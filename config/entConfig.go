@@ -4,13 +4,14 @@ import (
 	"context"
 	_ "github.com/go-sql-driver/mysql"
 	"log"
-	"sample/ent"
+	"user-service/ent"
 )
 
 var DB *ent.Client
 
 func EntConfig() {
-	client, err := ent.Open("mysql", "springetc:springetc12#@tcp(127.0.0.1:3306)/go_sample?parseTime=True")
+
+	client, err := ent.Open("mysql", "mydb:1234@tcp(192.168.199.128:3306)/go_sample?parseTime=True")
 
 	if err != nil {
 		log.Fatalf("failed opening connection to mysql: %v", err)
