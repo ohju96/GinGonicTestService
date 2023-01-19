@@ -33,7 +33,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file://$PROJECT_DIR$/../../../Go" />
+  <component name="GOROOT" url="file://$USER_HOME$/Go" />
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -51,7 +51,6 @@
   <component name="ProjectViewState">
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
-    <option name="showScratchesAndConsoles" value="false" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
