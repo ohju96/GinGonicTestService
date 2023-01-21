@@ -10,7 +10,7 @@ var DB *ent.Client
 
 func MySQLConnection() {
 
-	client, err := ent.Open("mysql", "speingetc:springetc12#@tcp(127.0.0.1:3306)/go_sample?parseTime=True")
+	client, err := ent.Open("mysql", "springetc:springetc12#@tcp(127.0.0.1:3306)/sample?parseTime=True")
 
 	if err != nil {
 		log.Fatalf("failed opening connection to sqlite: %v", err)
