@@ -2,9 +2,10 @@ package config
 
 import (
 	"context"
-	"entgo.io/ent/entc/integration/ent"
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
 	"log"
+	"user_service/ent"
 )
 
 var DB *ent.Client
@@ -19,11 +20,11 @@ func InitDB(c *Config) {
 	}
 
 	ctx := context.Background()
+	DB = client
 
 	if err := client.Schema.Create(ctx); err != nil {
 		log.Fatalf("failed creating schema resources: %v", err)
 	}
 
-	DB = client
 	fmt.Println(c.Db.Dbms, " connected successfully !!")
 }
